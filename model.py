@@ -436,7 +436,7 @@ class DCGAN(object):
         h4 = deconv2d(h3, [self.batch_size, s_h, s_w, self.c_dim], name='g_h4')
 
         return tf.nn.tanh(h4)
-      else:
+      else: # mnist goes here
         s_h, s_w = self.output_height, self.output_width
         s_h2, s_h4 = int(s_h/2), int(s_h/4)
         s_w2, s_w4 = int(s_w/2), int(s_w/4)
@@ -456,6 +456,11 @@ class DCGAN(object):
         h2 = tf.nn.relu(self.g_bn2(
             deconv2d(h1, [self.batch_size, s_h2, s_w2, self.gf_dim * 2], name='g_h2'), train=False))
         h2 = conv_cond_concat(h2, yb)
+        
+        #node {
+        #    name: "generator/Sigmoid"
+        #    op: "Sigmoid"
+        #    input: "generator/g_h3/Reshape"
 
         return tf.nn.sigmoid(deconv2d(h2, [self.batch_size, s_h, s_w, self.c_dim], name='g_h3'))
 

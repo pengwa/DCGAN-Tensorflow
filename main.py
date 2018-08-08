@@ -88,6 +88,9 @@ def main(_):
       if not dcgan.load(FLAGS.checkpoint_dir)[0]:
         raise Exception("[!] Train a model first, then run test mode")
       
+	        # Save GraphDef
+      tf.train.write_graph(sess.graph_def,'.','mnist_dcgan.pb', as_text=False)
+      tf.train.write_graph(sess.graph_def,'.','mnist_dcgan.pbtxt', as_text=True)
 
     # to_json("./web/js/layers.js", [dcgan.h0_w, dcgan.h0_b, dcgan.g_bn0],
     #                 [dcgan.h1_w, dcgan.h1_b, dcgan.g_bn1],

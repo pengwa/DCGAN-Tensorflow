@@ -192,9 +192,7 @@ def visualize(sess, dcgan, config, option):
       else:
         samples = sess.run(dcgan.sampler, feed_dict={dcgan.z: z_sample})
 
-      # Save GraphDef
-      tf.train.write_graph(sess.graph_def,'.','mnist_dcgan.pb', as_text=False)
-      tf.train.write_graph(sess.graph_def,'.','mnist_dcgan.pbtxt', as_text=True)
+
 
       save_images(samples, [image_frame_dim, image_frame_dim], './samples/test_arange_%s.png' % (idx))
   elif option == 2:

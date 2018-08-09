@@ -10718,6 +10718,18 @@ node {
   }
 }
 node {
+  name: "generator_1/output_finder"
+  op: "Add"
+  input: "generator_1/Sigmoid"
+  input: "generator_1/Sigmoid"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
   name: "discriminator_1/Reshape/shape"
   op: "Const"
   attr {

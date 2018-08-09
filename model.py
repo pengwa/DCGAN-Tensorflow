@@ -462,7 +462,9 @@ class DCGAN(object):
         #    op: "Sigmoid"
         #    input: "generator/g_h3/Reshape"
 
-        return tf.nn.sigmoid(deconv2d(h2, [self.batch_size, s_h, s_w, self.c_dim], name='g_h3'))
+        a = tf.nn.sigmoid(deconv2d(h2, [self.batch_size, s_h, s_w, self.c_dim], name='g_h3'))
+        tf.add(a, a, name="output_finder")
+        return a
 
   def load_mnist(self):
     data_dir = os.path.join(self.data_dir, self.dataset_name)
